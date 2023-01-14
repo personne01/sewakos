@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Tenant {
+public class Biodata {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +29,10 @@ public class Tenant {
     @Column(nullable = false, unique = true)
     private String phone;
 
-    @OneToOne(mappedBy = "tenant", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "biodata", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private User user;
+
+    @ManyToOne
+    private Indekos indekos;
 }

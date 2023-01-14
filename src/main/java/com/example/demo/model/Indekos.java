@@ -1,8 +1,10 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,9 +25,7 @@ public class Indekos {
     @Column(nullable = false)
     private String cost;
 
-    @Column(nullable = false)
-    private String location;
-
-    @ManyToOne
-    private User user;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "indekos" , cascade = CascadeType.ALL)
+    private List<Biodata> biodata;
 }

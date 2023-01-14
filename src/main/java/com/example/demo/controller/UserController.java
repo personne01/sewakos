@@ -1,12 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Tenant;
 import com.example.demo.model.User;
-import com.example.demo.service.TenantService;
+import com.example.demo.service.BiodataService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +12,13 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private UserService userService;
-    private TenantService tenantService;
+    private BiodataService biodataService;
 
 
     @Autowired
-    public UserController(UserService userService, TenantService tenantService){
+    public UserController(UserService userService, BiodataService biodataService){
         this.userService = userService;
-        this.tenantService = tenantService;
+        this.biodataService = biodataService;
     }
 
     @GetMapping
@@ -32,10 +29,9 @@ public class UserController {
     public User getById(@PathVariable Long id){
         return userService.getById(id);
     }
-    @PostMapping
-    public ResponseEntity<Tenant> create(@RequestBody Tenant tenant){
-        return new ResponseEntity(tenantService.create(tenant), HttpStatus.CREATED);
-    }
+
+
+
     @PutMapping("/{id}")
     public User update(@PathVariable Long id,@RequestBody User user){
         return userService.update(id, user);
