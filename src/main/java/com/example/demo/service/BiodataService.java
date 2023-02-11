@@ -7,6 +7,7 @@ import com.example.demo.model.dto.SignUpRequest;
 import com.example.demo.repository.BiodataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -18,6 +19,8 @@ import java.util.List;
 public class BiodataService {
     private BiodataRepository biodataRepository;
     private RoleService roleService;
+
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public BiodataService(BiodataRepository biodataRepository, RoleService roleService){
@@ -44,6 +47,7 @@ public class BiodataService {
 
         User user = new User();
         user.setName(signUpRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
         List<Role> role = new ArrayList();
         role.add(roleService.getById(signUpRequest.getRolesId()));

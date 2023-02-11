@@ -20,6 +20,12 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String password;
+
+    private Boolean isAccountLocked;
+    private Boolean isEnabled;
+
 //
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.EAGER)
